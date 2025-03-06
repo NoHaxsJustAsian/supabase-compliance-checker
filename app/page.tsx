@@ -3,9 +3,19 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { CheckCircle, ShieldAlert, ArrowRight, LogOut, Building, Server, Shield, Clock, XCircle, AlertTriangle, RefreshCw } from "lucide-react"
+import { CheckCircle, ShieldAlert, ArrowRight, LogOut, Building, Server, Shield, Clock, XCircle, AlertTriangle, RefreshCw, Check as CheckIcon } from "lucide-react"
 import { useAuth } from "@/lib/auth-context"
 import { useState, useEffect } from "react"
+import { 
+  HoverCard, 
+  HoverCardTrigger, 
+  HoverCardContent 
+} from "@/components/ui/hover-card"
+import { 
+  Avatar, 
+  AvatarImage, 
+  AvatarFallback 
+} from "@/components/ui/avatar"
 
 export default function Home() {
   const { user, signOut } = useAuth()
@@ -59,7 +69,6 @@ export default function Home() {
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-40">
           <div className="container px-4 md:px-6">
-            {/* Hero content with centered layout */}
             <div className="max-w-3xl mx-auto text-center mb-16">
               <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none mb-6">
                 Ensure Your Supabase Configuration is Compliant
@@ -81,8 +90,6 @@ export default function Home() {
                 </Link>
               </div>
             </div>
-            
-            {/* Finta-inspired macOS window with placeholder image - moved above the cards */}
             <div className="max-w-4xl mx-auto mb-20">
               <div className="bg-white rounded-lg shadow-xl overflow-hidden border border-gray-200">
                 {/* Window title bar */}
@@ -95,32 +102,19 @@ export default function Home() {
                   <div className="absolute left-0 right-0 mx-auto text-center text-xs text-gray-500 font-medium" style={{ width: 'fit-content' }}>Supabase Compliance Dashboard</div>
                 </div>
                 
-                {/* Placeholder image instead of scrollable content */}
-                <div className="h-[400px] bg-gradient-to-b from-blue-50 to-blue-100 flex items-center justify-center">
-                  <div className="text-center p-8 max-w-xl">
-                    <div className="text-2xl font-bold text-gray-800 mb-2">Security Compliance Monitor</div>
-                    <p className="text-gray-600 mb-6">Real-time monitoring, automated checks, comprehensive reporting.</p>
-                    <div className="flex gap-4 justify-center items-center">
-                      <div className="h-32 w-32 bg-white rounded-lg shadow-md flex items-center justify-center transition-transform hover:scale-105 duration-200">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-green-600">94%</div>
-                          <div className="text-xs text-gray-500">Overall Score</div>
-                        </div>
-                      </div>
-                      <div className="h-32 w-32 bg-white rounded-lg shadow-md flex items-center justify-center transition-transform hover:scale-105 duration-200">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-amber-500">3</div>
-                          <div className="text-xs text-gray-500">Warnings</div>
-                        </div>
-                      </div>
-                      <div className="h-32 w-32 bg-white rounded-lg shadow-md flex items-center justify-center transition-transform hover:scale-105 duration-200">
-                        <div className="text-center">
-                          <div className="text-2xl font-bold text-blue-600">12/15</div>
-                          <div className="text-xs text-gray-500">Checks Passed</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                {/* DelveDemo Video */}
+                <div className="flex items-center justify-center p-0">
+                  <video 
+                    className="w-full h-auto"
+                    controls
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                  >
+                    <source src="/DelveDemo.mp4" type="video/mp4" />
+                    Your browser does not support the video tag.
+                  </video>
                 </div>
               </div>
             </div>
@@ -355,8 +349,40 @@ export default function Home() {
       </main>
       <footer className="border-t py-6 md:py-0">
         <div className="container flex flex-col items-center justify-between gap-4 md:h-24 md:flex-row">
-          <p className="text-center text-sm leading-loose text-muted-foreground md:text-left">
-            © 2025 Supabase Compliance Checker. All rights reserved.
+          <p className="text-xs text-muted-foreground leading-loose md:text-left">
+            Built by{" "}
+            <HoverCard openDelay={100} closeDelay={100}>
+              <HoverCardTrigger asChild>
+                <a
+                  href="https://github.com/nohaxsjustasian"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="font-medium underline underline-offset-4"
+                >
+                  @nohaxsjustasian
+                </a>
+              </HoverCardTrigger>
+              <HoverCardContent className="w-80">
+                <div className="flex justify-between space-x-4">
+                  <Avatar>
+                    <AvatarImage src="https://github.com/nohaxsjustasian.png" />
+                    <AvatarFallback>NA</AvatarFallback>
+                  </Avatar>
+                  <div className="space-y-1">
+                    <h4 className="text-sm font-semibold">@nohaxsjustasian</h4>
+                    <p className="text-sm">
+                      NEU '25 | Searching for new grad SWE positions.
+                    </p>
+                    <div className="flex items-center pt-2">
+                      <CheckIcon className="mr-2 h-4 w-4 opacity-70" />{" "}
+                      <span className="text-xs text-muted-foreground">
+                        Joined December 2021
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </HoverCardContent>
+            </HoverCard>
           </p>
         </div>
       </footer>

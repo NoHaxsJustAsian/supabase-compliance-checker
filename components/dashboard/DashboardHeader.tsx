@@ -1,9 +1,19 @@
 import { Button } from "@/components/ui/button";
-import { RefreshCw, ShieldCheck, Database } from "lucide-react";
+import { RefreshCw, ShieldCheck, Database, MessageSquare, Bot } from "lucide-react";
 import { ToggleGroup, ToggleGroupItem } from "@/components/ui/toggle-group";
 import { ProjectInfo } from "@/lib/types";
 import { motion, AnimatePresence } from "framer-motion";
 import { ViewTransitionFadeLeft, ViewTransitionFadeRight } from "@/components/ui/animations";
+import { useState } from "react";
+import {
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
+import { ChatSheet } from "@/components/ChatSheet";
 
 interface DashboardHeaderProps {
   viewMode: "overview" | "project";
@@ -87,7 +97,35 @@ export default function DashboardHeader({
         </h1>
       </div>
       
-      <div className="flex space-x-2">
+      <div className="flex space-x-2 items-center">
+        <Sheet>
+          <SheetTrigger asChild>
+            <Button variant="outline" size="icon" className="mr-2 relative group">
+              <MessageSquare className="h-4 w-4 group-hover:text-primary transition-colors" />
+              <span className="absolute -top-1 -right-1 flex h-3 w-3">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary/60 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-3 w-3 bg-primary"></span>
+              </span>
+            </Button>
+          </SheetTrigger>
+          <SheetContent side="right" className="sm:max-w-md w-[90vw] p-0 border-l border-l-border/50">
+            <div className="h-full flex flex-col">
+              <SheetHeader className="px-4 py-3 border-b border-border/50">
+                <SheetTitle className="text-lg flex items-center">
+                  <Bot className="mr-2 h-5 w-5 text-blue-600" />
+                  Compliance Assistant
+                </SheetTitle>
+                <SheetDescription className="text-sm">
+                  Ask about potential compliance issues and how to resolve them
+                </SheetDescription>
+              </SheetHeader>
+              <div className="flex-1 overflow-hidden">
+                <ChatSheet />
+              </div>
+            </div>
+          </SheetContent>
+        </Sheet>
+        
         <ToggleGroup 
           type="single" 
           value={viewMode} 
