@@ -27,7 +27,7 @@ import {
 import { useToast } from "@/components/ui/use-toast"
 
 // Define sorting types
-type SortField = "name" | "rls_enabled" | "project_name"
+type SortField = "name" | "rls_enabled" | "project_name" | "schema"
 type SortDirection = "asc" | "desc" | null
 
 interface TableData {
@@ -229,7 +229,7 @@ export default function TablesList({
     return (
       <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
         <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="h-5 w-5 text-blue-600 mr-2" />
             Tables & RLS Status
           </CardTitle>
@@ -238,7 +238,7 @@ export default function TablesList({
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <p className="text-sm text-gray-500">Loading table data...</p>
+            <p className="text-sm text-muted-foreground">Loading table data...</p>
           </div>
         </CardContent>
       </Card>
@@ -250,7 +250,7 @@ export default function TablesList({
     return (
       <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
         <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="h-5 w-5 text-blue-600 mr-2" />
             Tables & RLS Status
           </CardTitle>
@@ -258,8 +258,8 @@ export default function TablesList({
         </CardHeader>
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
-            <Database className="h-8 w-8 text-gray-500" />
-            <p className="text-sm text-gray-500">Please select a project to view RLS status for tables.</p>
+            <Database className="h-8 w-8 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">Please select a project to view RLS status for tables.</p>
           </div>
         </CardContent>
       </Card>
@@ -270,7 +270,7 @@ export default function TablesList({
     return (
       <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
         <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <Database className="h-5 w-5 text-blue-600 mr-2" />
             Tables & RLS Status
           </CardTitle>
@@ -278,8 +278,8 @@ export default function TablesList({
         </CardHeader>
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
-            <Database className="h-8 w-8 text-gray-500" />
-            <p className="text-sm text-gray-500">No tables found. Please check your database configuration.</p>
+            <Database className="h-8 w-8 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">No tables found. Please check your database configuration.</p>
           </div>
         </CardContent>
       </Card>
@@ -287,10 +287,10 @@ export default function TablesList({
   }
 
   return (
-    <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-      <CardHeader className="border-b border-gray-100">
+    <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+      <CardHeader className="border-b border-gray-100 dark:border-gray-800">
         <div className="flex justify-between items-center">
-          <CardTitle className="flex items-center text-gray-800">
+          <CardTitle className="flex items-center text-foreground dark:text-white">
             <Database className="h-5 w-5 text-blue-600 mr-2" />
             Tables & RLS Status
           </CardTitle>
@@ -307,7 +307,7 @@ export default function TablesList({
             )}
           </div>
         </div>
-        <CardDescription>
+        <CardDescription className="dark:text-gray-300">
           Row Level Security status for all database tables
         </CardDescription>
       </CardHeader>
@@ -317,13 +317,13 @@ export default function TablesList({
             {/* Schema filter */}
             <Popover open={isSchemaFilterOpen} onOpenChange={setIsSchemaFilterOpen}>
               <PopoverTrigger asChild>
-                <Button variant="outline" className="text-sm gap-1 h-9 px-3 border-gray-200 hover:bg-gray-50">
+                <Button variant="outline" className="text-sm gap-1 h-9 px-3 border-border hover:bg-muted/50">
                   <Filter className="h-3.5 w-3.5 text-blue-600" />
                   {schemaFilter === "all" ? "All Schemas" : schemaFilter}
                   <Badge variant="secondary" className="ml-1 h-5 text-xs bg-gray-100">
                     {getSchemaCount(schemaFilter)}
                   </Badge>
-                  <ChevronsUpDown className="ml-1 h-3.5 w-3.5 text-gray-500 opacity-70" />
+                  <ChevronsUpDown className="ml-1 h-3.5 w-3.5 text-muted-foreground opacity-70" />
                 </Button>
               </PopoverTrigger>
               <PopoverContent className="w-60 p-0" align="start">
@@ -382,7 +382,7 @@ export default function TablesList({
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-9 h-9 border-gray-200 focus-visible:ring-blue-500"
             />
-            <div className="absolute left-3 top-2.5 text-gray-400">
+            <div className="absolute left-3 top-2.5 text-muted-foreground">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -394,44 +394,88 @@ export default function TablesList({
                 className="absolute right-0 top-0 h-9 w-9 p-0"
                 onClick={() => setSearchTerm("")}
               >
-                <X className="h-4 w-4 text-gray-500" />
+                <X className="h-4 w-4 text-muted-foreground" />
               </Button>
             )}
           </div>
         </div>
 
-        <div className="border-t border-gray-100">
+        <div className="border-t border-gray-100 dark:border-gray-800">
           <Table>
-            <TableHeader className="bg-gray-50">
+            <TableHeader className="bg-muted/50 dark:bg-muted/20">
               <TableRow>
                 <TableHead 
-                  className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                  className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort("name")}
                 >
-                  <div className="flex items-center">
-                    Table Name
-                    {getSortIcon("name")}
-                  </div>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex items-center">
+                          Table Name
+                          {getSortIcon("name")}
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Click to sort by table name</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableHead>
-                <TableHead>Schema</TableHead>
+                <TableHead 
+                  className="cursor-pointer hover:bg-muted/50"
+                  onClick={() => handleSort("schema")}
+                >
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex items-center">
+                          Schema
+                          {getSortIcon("schema")}
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Click to sort by schema</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                </TableHead>
                 <TableHead
-                  className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                  className="cursor-pointer hover:bg-muted/50"
                   onClick={() => handleSort("rls_enabled")}
                 >
-                  <div className="flex items-center">
-                    RLS Status
-                    {getSortIcon("rls_enabled")}
-                  </div>
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="flex items-center">
+                          RLS Status
+                          {getSortIcon("rls_enabled")}
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Click to sort by RLS status</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
                 </TableHead>
                 {!isProjectView && (
                   <TableHead
-                    className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                    className="cursor-pointer hover:bg-muted/50"
                     onClick={() => handleSort("project_name")}
                   >
-                    <div className="flex items-center">
-                      Project
-                      {getSortIcon("project_name")}
-                    </div>
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div className="flex items-center">
+                            Project
+                            {getSortIcon("project_name")}
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent>
+                          <p>Click to sort by project</p>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </TableHead>
                 )}
                 <TableHead className="text-right">Actions</TableHead>
@@ -441,22 +485,22 @@ export default function TablesList({
               {paginatedTables.map((table) => (
                 <TableRow 
                   key={table.id}
-                  className="transition-colors hover:bg-gray-50"
+                  className="transition-colors hover:bg-muted/50 dark:hover:bg-muted/50"
                 >
                   <TableCell className="font-medium">{table.name}</TableCell>
                   <TableCell>
-                    <Badge variant="outline" className="font-normal text-xs bg-gray-50">
+                    <Badge variant="outline" className="bg-blue-50 text-blue-700 border border-blue-200 dark:bg-slate-800 dark:text-blue-300 dark:border-slate-700 font-normal text-xs">
                       {table.schema}
                     </Badge>
                   </TableCell>
                   <TableCell>
                     {table.rls_enabled ? (
-                      <Badge className="bg-green-100 text-green-800 border-0 flex items-center w-fit hover:bg-green-100 hover:text-green-800">
+                      <Badge className="bg-green-100 text-green-800 border-0 flex items-center w-fit hover:bg-green-100 hover:text-green-800 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/30 dark:hover:text-green-300">
                         <CheckCircle className="h-3 w-3 mr-1" />
                         <span>Enabled</span>
                       </Badge>
                     ) : (
-                      <Badge className="bg-red-100 text-red-800 border-0 flex items-center w-fit hover:bg-red-100 hover:text-red-800">
+                      <Badge className="bg-red-100 text-red-800 border-0 flex items-center w-fit hover:bg-red-100 hover:text-red-800 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/30 dark:hover:text-red-300">
                         <XCircle className="h-3 w-3 mr-1" />
                         <span>Disabled</span>
                       </Badge>
@@ -477,7 +521,7 @@ export default function TablesList({
                           <Button 
                             variant="outline" 
                             size="sm"
-                            className="text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                            className="text-primary border-border hover:bg-muted/50 hover:text-primary-foreground"
                             onClick={() => setSelectedTableId(table.id)}
                             disabled={enablingRls.includes(table.id)}
                           >
@@ -512,7 +556,7 @@ export default function TablesList({
                                 <Button 
                                   variant="ghost" 
                                   size="icon" 
-                                  className="absolute top-2 right-2 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-800"
+                                  className="absolute top-2 right-2 h-6 w-6 text-muted-foreground hover:text-primary-foreground hover:bg-primary"
                                   onClick={() => copyToClipboard(`ALTER TABLE "${table.schema}"."${table.name}" ENABLE ROW LEVEL SECURITY;`)}
                                 >
                                   <Copy className="h-3 w-3" />
@@ -572,7 +616,7 @@ export default function TablesList({
         
         {sortedTables.length > itemsPerPage && (
           <div className="py-4 flex justify-between items-center px-6 border-t border-gray-100">
-            <div className="text-sm text-gray-500">
+            <div className="text-sm text-muted-foreground">
               Showing {startIndex + 1}-{endIndex} of {sortedTables.length} tables
             </div>
             <Pagination
@@ -584,21 +628,21 @@ export default function TablesList({
         )}
         
         {/* Statistics at the bottom */}
-        <div className="pt-2 pb-4 px-6 flex justify-between items-center border-t border-gray-100 bg-gray-50">
+        <div className="pt-2 pb-4 px-6 flex justify-between items-center border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">{passedCount} Tables with RLS</span>
+              <span className="text-sm text-muted-foreground">{passedCount} Tables with RLS</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">{failedCount} Tables without RLS</span>
+              <span className="text-sm text-muted-foreground">{failedCount} Tables without RLS</span>
             </div>
           </div>
           
           <Dialog>
             <DialogTrigger asChild>
-              <Button variant="outline" size="sm" className="text-gray-600">
+              <Button variant="outline" size="sm" className="text-muted-foreground">
                 <Database className="h-3.5 w-3.5 mr-1" />
                 View Raw Data
               </Button>

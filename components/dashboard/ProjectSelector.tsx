@@ -30,8 +30,8 @@ export default function ProjectSelector({
       <CardHeader className="pb-3">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle>Projects</CardTitle>
-            <CardDescription>View and manage compliance for all your Supabase projects</CardDescription>
+            <CardTitle className="dark:text-white">Projects</CardTitle>
+            <CardDescription className="dark:text-gray-300">View and manage compliance for all your Supabase projects</CardDescription>
           </div>
           <Button variant="outline" onClick={() => runComplianceChecks()} disabled={runningChecks}>
             <RefreshCw className={`mr-2 h-4 w-4 ${runningChecks ? "animate-spin" : ""}`} />

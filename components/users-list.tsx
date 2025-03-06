@@ -198,9 +198,9 @@ export default function UsersList({
 
   if (loading) {
     return (
-      <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-        <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+      <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+        <CardHeader className="border-b border-gray-100 dark:border-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <User className="h-5 w-5 text-blue-600 mr-2" />
             Users & MFA Status
           </CardTitle>
@@ -209,7 +209,7 @@ export default function UsersList({
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
             <Loader2 className="h-8 w-8 animate-spin text-blue-600" />
-            <p className="text-sm text-gray-500">Loading user data...</p>
+            <p className="text-sm text-muted-foreground">Loading user data...</p>
           </div>
         </CardContent>
       </Card>
@@ -219,9 +219,9 @@ export default function UsersList({
   // If in project view mode and no project is selected, show a placeholder
   if (isProjectView && !selectedProjectId) {
     return (
-      <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-        <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+      <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+        <CardHeader className="border-b border-gray-100 dark:border-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <User className="h-5 w-5 text-blue-600 mr-2" />
             Users & MFA Status
           </CardTitle>
@@ -229,8 +229,8 @@ export default function UsersList({
         </CardHeader>
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
-            <User className="h-8 w-8 text-gray-500" />
-            <p className="text-sm text-gray-500">Please select a project to view MFA status for users.</p>
+            <User className="h-8 w-8 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">Please select a project to view MFA status for users.</p>
           </div>
         </CardContent>
       </Card>
@@ -239,9 +239,9 @@ export default function UsersList({
 
   if (users.length === 0) {
     return (
-      <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-        <CardHeader className="border-b border-gray-100">
-          <CardTitle className="flex items-center text-gray-800">
+      <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+        <CardHeader className="border-b border-gray-100 dark:border-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <User className="h-5 w-5 text-blue-600 mr-2" />
             Users & MFA Status
           </CardTitle>
@@ -249,8 +249,8 @@ export default function UsersList({
         </CardHeader>
         <CardContent className="flex justify-center items-center py-10">
           <div className="flex flex-col items-center space-y-4">
-            <User className="h-8 w-8 text-gray-500" />
-            <p className="text-sm text-gray-500">No users found. Please check your user authentication settings.</p>
+            <User className="h-8 w-8 text-muted-foreground" />
+            <p className="text-sm text-muted-foreground">No users found. Please check your user authentication settings.</p>
           </div>
         </CardContent>
       </Card>
@@ -258,20 +258,20 @@ export default function UsersList({
   }
 
   return (
-    <Card className="border border-gray-200 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
-      <CardHeader className="border-b border-gray-100">
+    <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
+      <CardHeader className="border-b border-gray-100 dark:border-gray-800">
         <div className="flex justify-between items-center">
-          <CardTitle className="flex items-center text-gray-800">
+          <CardTitle className="flex items-center text-foreground">
             <User className="h-5 w-5 text-blue-600 mr-2" />
             Users & MFA Status
           </CardTitle>
           <div className="flex items-center gap-2">
-            <Badge className="bg-green-100 text-green-800 border-0 hover:bg-green-100 hover:text-green-800">
+            <Badge className="bg-green-100 text-green-800 border-0 hover:bg-green-100 hover:text-green-800 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/30 dark:hover:text-green-300">
               <CheckCircle className="h-3 w-3 mr-1" />
               <span>{passedCount} Secured</span>
             </Badge>
             {failedCount > 0 && (
-              <Badge className="bg-red-100 text-red-800 border-0 hover:bg-red-100 hover:text-red-800">
+              <Badge className="bg-red-100 text-red-800 border-0 hover:bg-red-100 hover:text-red-800 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/30 dark:hover:text-red-300">
                 <XCircle className="h-3 w-3 mr-1" />
                 <span>{failedCount} Unsecured</span>
               </Badge>
@@ -295,7 +295,7 @@ export default function UsersList({
               onChange={(e) => setSearchTerm(e.target.value)}
               className="pl-9 h-9 border-gray-200 focus-visible:ring-blue-500"
             />
-            <div className="absolute left-3 top-2.5 text-gray-400">
+            <div className="absolute left-3 top-2.5 text-muted-foreground">
               <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <circle cx="11" cy="11" r="8"></circle>
                 <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
@@ -304,12 +304,12 @@ export default function UsersList({
           </div>
         </div>
 
-        <div className="border-t border-gray-100">
+        <div className="border-t border-gray-100 dark:border-gray-800">
           <Table>
-            <TableHeader className="bg-gray-50">
+            <TableHeader className="bg-muted/50 dark:bg-muted/20">
               <TableRow>
                 <TableHead 
-                  className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                  className="font-medium text-sm text-muted-foreground hover:text-primary cursor-pointer"
                   onClick={() => handleSort("email")}
                 >
                   <div className="flex items-center">
@@ -318,7 +318,7 @@ export default function UsersList({
                   </div>
                 </TableHead>
                 <TableHead
-                  className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                  className="font-medium text-sm text-muted-foreground hover:text-primary cursor-pointer"
                   onClick={() => handleSort("mfa_enabled")}
                 >
                   <div className="flex items-center">
@@ -327,7 +327,7 @@ export default function UsersList({
                   </div>
                 </TableHead>
                 <TableHead
-                  className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                  className="font-medium text-sm text-muted-foreground hover:text-primary cursor-pointer"
                   onClick={() => handleSort("last_sign_in")}
                 >
                   <div className="flex items-center">
@@ -337,7 +337,7 @@ export default function UsersList({
                 </TableHead>
                 {!isProjectView && (
                   <TableHead
-                    className="font-medium text-sm text-gray-600 hover:text-blue-600 cursor-pointer"
+                    className="font-medium text-sm text-muted-foreground hover:text-primary cursor-pointer"
                     onClick={() => handleSort("project_name")}
                   >
                     <div className="flex items-center">
@@ -353,17 +353,17 @@ export default function UsersList({
               {paginatedUsers.map((user) => (
                 <TableRow 
                   key={user.id}
-                  className="transition-colors hover:bg-gray-50"
+                  className="transition-colors hover:bg-muted/50 dark:hover:bg-muted/50"
                 >
                   <TableCell className="font-medium">{user.email}</TableCell>
                   <TableCell>
                     {user.mfa_enabled ? (
-                      <Badge className="bg-green-100 text-green-800 border-0 flex items-center w-fit hover:bg-green-100 hover:text-green-800">
+                      <Badge className="bg-green-100 text-green-800 border-0 flex items-center w-fit hover:bg-green-100 hover:text-green-800 dark:bg-green-900/30 dark:text-green-300 dark:hover:bg-green-900/30 dark:hover:text-green-300">
                         <CheckCircle className="h-3 w-3 mr-1" />
                         <span>Enabled</span>
                       </Badge>
                     ) : (
-                      <Badge className="bg-red-100 text-red-800 border-0 flex items-center w-fit hover:bg-red-100 hover:text-red-800">
+                      <Badge className="bg-red-100 text-red-800 border-0 flex items-center w-fit hover:bg-red-100 hover:text-red-800 dark:bg-red-900/30 dark:text-red-300 dark:hover:bg-red-900/30 dark:hover:text-red-300">
                         <XCircle className="h-3 w-3 mr-1" />
                         <span>Disabled</span>
                       </Badge>
@@ -384,7 +384,7 @@ export default function UsersList({
                           <Button 
                             variant="outline" 
                             size="sm"
-                            className="text-blue-600 border-blue-200 hover:bg-blue-50 hover:text-blue-700"
+                            className="text-sm gap-1 h-9 px-3 border-border hover:bg-muted/50"
                             disabled={fixingUsers.includes(user.id)}
                           >
                             {fixingUsers.includes(user.id) ? (
@@ -421,7 +421,7 @@ export default function UsersList({
                                 <Button 
                                   variant="ghost" 
                                   size="icon" 
-                                  className="absolute top-2 right-2 h-6 w-6 text-gray-400 hover:text-white hover:bg-gray-800"
+                                  className="absolute top-2 right-2 h-6 w-6 text-muted-foreground hover:text-primary-foreground hover:bg-primary"
                                   onClick={() => copyToClipboard(`POST /auth/v1/admin/users/${user.id}/mfa
 {
   "enforce_mfa": true
@@ -480,8 +480,8 @@ export default function UsersList({
         </div>
         
         {sortedUsers.length > itemsPerPage && (
-          <div className="py-4 flex justify-between items-center px-6 border-t border-gray-100">
-            <div className="text-sm text-gray-500">
+          <div className="py-4 flex justify-between items-center px-6 border-t border-gray-100 dark:border-gray-800">
+            <div className="text-sm text-muted-foreground">
               Showing {startIndex + 1}-{endIndex} of {sortedUsers.length} users
             </div>
             <Pagination
@@ -493,15 +493,15 @@ export default function UsersList({
         )}
         
         {/* Statistics at the bottom */}
-        <div className="pt-2 pb-4 px-6 flex justify-between items-center border-t border-gray-100 bg-gray-50">
+        <div className="pt-2 pb-4 px-6 flex justify-between items-center border-t border-gray-100 dark:border-gray-800 bg-gray-50 dark:bg-gray-900">
           <div className="flex items-center space-x-4">
             <div className="flex items-center">
               <div className="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">{passedCount} Users with MFA</span>
+              <span className="text-sm text-muted-foreground">{passedCount} Users with MFA</span>
             </div>
             <div className="flex items-center">
               <div className="w-3 h-3 bg-red-500 rounded-full mr-2"></div>
-              <span className="text-sm text-gray-600">{failedCount} Users without MFA</span>
+              <span className="text-sm text-muted-foreground">{failedCount} Users without MFA</span>
             </div>
           </div>
         </div>

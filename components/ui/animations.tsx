@@ -268,4 +268,30 @@ export const ViewModeSwitchContainer = ({
   >
     {children}
   </motion.div>
+)
+
+// Navigation link animation
+export const NavLink = ({ 
+  children, 
+  isActive = false,
+  className = "" 
+}: { 
+  children: ReactNode,
+  isActive?: boolean,
+  className?: string 
+}) => (
+  <motion.div
+    className={`relative ${className}`}
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {children}
+    {isActive && (
+      <motion.div
+        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary"
+        layoutId="navIndicator"
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      />
+    )}
+  </motion.div>
 ) 

@@ -226,7 +226,7 @@ export default function ProjectsList({
   }
 
   return (
-    <Card>
+    <Card className="border border-gray-200 dark:border-gray-800 shadow-sm overflow-hidden transition-all duration-300 hover:shadow-md">
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
@@ -260,7 +260,7 @@ export default function ProjectsList({
 
           <div className="rounded-md border">
             <Table>
-              <TableHeader>
+              <TableHeader className="bg-muted/50 dark:bg-muted/20">
                 <TableRow>
                   <TableHead 
                     className="cursor-pointer hover:bg-muted/50"
@@ -354,9 +354,9 @@ export default function ProjectsList({
                       <TableCell>
                         <div className="flex items-center space-x-2">
                           {project.pitr_enabled ? (
-                            <CheckCircle className="h-5 w-5 text-green-500" />
+                            <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />
                           ) : (
-                            <XCircle className="h-5 w-5 text-red-500" />
+                            <XCircle className="h-5 w-5 text-red-500 dark:text-red-400" />
                           )}
                           <span>{project.pitr_enabled ? "Enabled" : "Disabled"}</span>
                         </div>
@@ -371,6 +371,7 @@ export default function ProjectsList({
                               <Button
                                 size="sm"
                                 variant="outline"
+                                className="border-border hover:bg-muted/50"
                                 onClick={(e) => {
                                   e.stopPropagation();
                                   setSelectedPitrProjectId(project.id);

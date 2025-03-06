@@ -110,8 +110,8 @@ export default function ComplianceCheck({
       <CardFooter>
         <div className="flex items-center space-x-2">
           {status === "checking" && <AlertTriangle className="h-5 w-5 text-yellow-500" />}
-          {status === "passed" && <CheckCircle className="h-5 w-5 text-green-500" />}
-          {status === "failed" && <XCircle className="h-5 w-5 text-red-500" />}
+          {status === "passed" && <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />}
+          {status === "failed" && <XCircle className="h-5 w-5 text-red-500 dark:text-red-400" />}
           {status === "error" && <AlertTriangle className="h-5 w-5 text-orange-500" />}
           <span className="text-sm font-medium">
             {status === "checking" && "Running check..."}

@@ -239,7 +239,7 @@ export default function ComplianceStatusCards({
                             animate="animate"
                             exit="exit"
                           >
-                            <CheckCircle className="h-5 w-5 text-green-500" />
+                            <CheckCircle className="h-5 w-5 text-green-500 dark:text-green-400" />
                           </motion.div>
                         )}
                         {getOverallStatus() === "failed" && !runningChecks && (
@@ -250,7 +250,7 @@ export default function ComplianceStatusCards({
                             animate="animate"
                             exit="exit"
                           >
-                            <XCircle className="h-5 w-5 text-red-500" />
+                            <XCircle className="h-5 w-5 text-red-500 dark:text-red-400" />
                           </motion.div>
                         )}
                         {getOverallStatus() === "error" && !runningChecks && (

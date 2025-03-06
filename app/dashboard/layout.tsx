@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { checkAndCreateTables } from "@/lib/db-checker"
 import { UserMenu } from "@/components/UserMenu"
 import { PATPopup } from "@/components/PATPopup"
+import { ThemeToggle } from "@/components/ui/theme-toggle"
 import Link from "next/link"
 
 export default function DashboardLayout({
@@ -30,6 +31,7 @@ export default function DashboardLayout({
             </Link>
           </div>
           <div className="flex items-center gap-2">
+            <ThemeToggle />
             <UserMenu />
           </div>
         </div>

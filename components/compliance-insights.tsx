@@ -76,20 +76,20 @@ export default function ComplianceInsights({
     <Card>
       <CardHeader>
         <CardTitle className="flex items-center">
-          <LightbulbIcon className="h-5 w-5 mr-2 text-yellow-500" />
-          Compliance Insights
+          <LightbulbIcon className="h-5 w-5 mr-2 text-yellow-500 dark:text-yellow-400" />
+          Insights
         </CardTitle>
         <CardDescription>Recommendations to improve your compliance posture</CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         {/* MFA Recommendations */}
         {mfaStatus?.status === "failed" && (
-          <Alert className="bg-amber-50 border-amber-200">
+          <Alert className="bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800">
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <AlertTriangle className="h-4 w-4 text-amber-600 mr-2" />
-                  <h4 className="text-amber-800 font-medium">Multi-Factor Authentication Required</h4>
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-2" />
+                  <h4 className="text-amber-800 dark:text-amber-300 font-medium">Multi-Factor Authentication Required</h4>
                 </div>
                 
                 <Sheet open={activeSheet === "mfa"} onOpenChange={(open) => setActiveSheet(open ? "mfa" : null)}>
@@ -189,12 +189,12 @@ using ( (auth.jwt()->>'aal') = 'aal2' );`)}
 
         {/* RLS Recommendations */}
         {rlsStatus?.status === "failed" && (
-          <Alert className="bg-amber-50 border-amber-200">
+          <Alert className="bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800">
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <AlertTriangle className="h-4 w-4 text-amber-600 mr-2" />
-                  <h4 className="text-amber-800 font-medium">Row Level Security Missing</h4>
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-2" />
+                  <h4 className="text-amber-800 dark:text-amber-300 font-medium">Row Level Security Missing</h4>
                 </div>
                 
                 <Sheet open={activeSheet === "rls"} onOpenChange={(open) => setActiveSheet(open ? "rls" : null)}>
@@ -207,7 +207,7 @@ using ( (auth.jwt()->>'aal') = 'aal2' );`)}
                   <SheetContent>
                     <SheetHeader>
                       <div className="flex items-center mb-2">
-                        <AlertTriangle className="h-4 w-4 text-amber-600 mr-2" />
+                        <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-2" />
                         <SheetTitle>Fix Row Level Security</SheetTitle>
                       </div>
                       <SheetDescription>
@@ -266,7 +266,7 @@ USING (auth.uid() = user_id);`)}
                 </Sheet>
               </div>
               
-              <AlertDescription className="text-amber-700">
+              <AlertDescription className="text-amber-700 dark:text-amber-300">
                 <p className="mb-2">
                   Some of your tables don't have Row Level Security enabled. Implement RLS on all tables:
                 </p>
@@ -298,7 +298,7 @@ USING (auth.uid() = user_id);`)}
                     <span className="sr-only">Copy</span>
                   </Button>
                 </div>
-                <p className="text-xs">Replace table_name with your actual table name and user_id with the column that stores the user ID.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-400">Replace table_name with your actual table name and user_id with the column that stores the user ID.</p>
               </AlertDescription>
             </div>
           </Alert>
@@ -306,12 +306,12 @@ USING (auth.uid() = user_id);`)}
 
         {/* PITR Recommendations */}
         {pitrStatus?.status === "failed" && (
-          <Alert className="bg-amber-50 border-amber-200">
+          <Alert className="bg-amber-50 dark:bg-amber-950/30 border-amber-200 dark:border-amber-800">
             <div className="flex flex-col space-y-2 w-full">
               <div className="flex items-center justify-between">
                 <div className="flex items-center">
-                  <AlertTriangle className="h-4 w-4 text-amber-600 mr-2" />
-                  <h4 className="text-amber-800 font-medium">Point-in-Time Recovery Not Enabled</h4>
+                  <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-2" />
+                  <h4 className="text-amber-800 dark:text-amber-300 font-medium">Point-in-Time Recovery Not Enabled</h4>
                 </div>
                 
                 <Sheet open={activeSheet === "pitr"} onOpenChange={(open) => setActiveSheet(open ? "pitr" : null)}>
@@ -324,7 +324,7 @@ USING (auth.uid() = user_id);`)}
                   <SheetContent>
                     <SheetHeader>
                       <div className="flex items-center mb-2">
-                        <AlertTriangle className="h-4 w-4 text-amber-600 mr-2" />
+                        <AlertTriangle className="h-4 w-4 text-amber-600 dark:text-amber-400 mr-2" />
                         <SheetTitle>Enable Point-in-Time Recovery</SheetTitle>
                       </div>
                       <SheetDescription>
@@ -365,11 +365,11 @@ USING (auth.uid() = user_id);`)}
                 </Sheet>
               </div>
               
-              <AlertDescription className="text-amber-700">
+              <AlertDescription className="text-amber-700 dark:text-amber-300">
                 <p className="mb-2">
                   Point-in-Time Recovery is not enabled for all projects. Enable PITR in your project settings for data recovery capability.
                 </p>
-                <p className="text-xs">PITR allows you to restore your database to any point in time within the retention period, protecting against accidental data loss.</p>
+                <p className="text-xs text-amber-700 dark:text-amber-400">PITR allows you to restore your database to any point in time within the retention period, protecting against accidental data loss.</p>
               </AlertDescription>
             </div>
           </Alert>
