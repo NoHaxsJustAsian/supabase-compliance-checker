@@ -56,7 +56,10 @@ export default function Home() {
                     <Button 
                       variant="ghost" 
                       size="sm"
-                      onClick={async () => await signOut()}
+                      onClick={async () => {
+                        await signOut();
+                        window.location.href = '/auth';
+                      }}
                       className="text-sm font-medium"
                     >
                       Logout <LogOut className="h-4 w-4 ml-2" />

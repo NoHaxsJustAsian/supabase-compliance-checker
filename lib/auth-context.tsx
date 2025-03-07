@@ -113,12 +113,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       // Sign out from Supabase Auth
       try {
-        const { error } = await supabase.auth.signOut()
+        const { error } = await supabase.auth.signOut({
+          scope: 'global' // Ensures complete sign out across all browser tabs
+        })
         if (error) {
           console.warn("Supabase sign out error:", error)
         }
       } catch (authError) {
         console.error("Error during Supabase auth signOut:", authError)
+      }
+
+      // Clear all auth-related local and session storage
+      if (typeof window !== 'undefined') {
+        // Clear any auth-related data
+        localStorage.removeItem('supabase.auth.token')
+        sessionStorage.clear() // Clear all session storage
+        
+        // Replace current history state to prevent going back to authenticated pages
+        window.history.replaceState(null, '', '/auth')
       }
       
       // Always navigate to auth page, regardless of any errors

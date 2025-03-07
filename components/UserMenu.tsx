@@ -34,18 +34,18 @@ export function UserMenu() {
   const handleSignOut = async () => {
     try {
       console.log("Starting sign out process");
+      
       // Call the auth context signOut method
       const { error } = await signOut();
       
       if (error) {
         console.error("Error from signOut:", error);
         // Force redirect even if there was an error from the signOut function
-        router.push('/auth');
+        window.location.href = '/auth';
       } else {
         console.log("Sign out successful");
-        // The router.push() is already called in the signOut function,
-        // but we'll add it here as a fallback just in case
-        router.push('/auth');
+        // Force a full page reload to clear any remaining in-memory state
+        window.location.href = '/auth';
       }
     } catch (error) {
       console.error("Exception during sign out:", error);

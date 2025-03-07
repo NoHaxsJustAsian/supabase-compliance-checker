@@ -142,11 +142,23 @@ export async function logComplianceCheck(
 
 export function clearCredentials() {
   if (isBrowser) {
+    // Clear all session storage items related to authentication
     sessionStorage.removeItem("supabase_pat")
     sessionStorage.removeItem("supabase_project_id")
     sessionStorage.removeItem("supabase_last_auth")
     sessionStorage.removeItem("supabase_rate_limit_remaining")
     sessionStorage.removeItem("supabase_check_all_projects")
+    
+    // Clear any other potential auth-related items
+    localStorage.removeItem('supabase.auth.token')
+    
+    // Also clear any supabase cookies that might be present
+    document.cookie.split(';').forEach(cookie => {
+      const [name] = cookie.trim().split('=')
+      if (name.includes('supabase') || name.includes('sb-')) {
+        document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/;`
+      }
+    })
   }
 }
 
