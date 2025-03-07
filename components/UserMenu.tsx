@@ -32,7 +32,26 @@ export function UserMenu() {
   const [pat, setPat] = useState("")
   
   const handleSignOut = async () => {
-    await signOut()
+    try {
+      console.log("Starting sign out process");
+      // Call the auth context signOut method
+      const { error } = await signOut();
+      
+      if (error) {
+        console.error("Error from signOut:", error);
+        // Force redirect even if there was an error from the signOut function
+        router.push('/auth');
+      } else {
+        console.log("Sign out successful");
+        // The router.push() is already called in the signOut function,
+        // but we'll add it here as a fallback just in case
+        router.push('/auth');
+      }
+    } catch (error) {
+      console.error("Exception during sign out:", error);
+      // Force redirect to auth page as a final fallback
+      window.location.href = '/auth';
+    }
   }
   
   const handleUpdatePAT = async () => {

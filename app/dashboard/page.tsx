@@ -39,7 +39,8 @@ export default function DashboardPage() {
     fetchEvidenceLogs,
     setViewMode,
     setSelectedProjectId,
-    complianceStatus
+    complianceStatus,
+    hasCredentials
   } = useComplianceData()
 
   // Track previous viewMode to determine transition direction
@@ -193,6 +194,7 @@ export default function DashboardPage() {
           getOverallStatus={getOverallStatus}
           modeTransition={modeTransition}
           complianceStatus={complianceStatus}
+          hasCredentials={hasCredentials}
         />
 
         <AnimatePresence mode="wait">

@@ -72,6 +72,13 @@ export default function AuthPage() {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
   useEffect(() => {
+    // Check for tab parameter in URL
+    const params = new URLSearchParams(window.location.search);
+    const tabParam = params.get('tab');
+    if (tabParam === 'pat') {
+      setAuthTab('pat');
+    }
+
     // Test Supabase connection on component load
     const testConnection = async () => {
       console.log("Testing Supabase connection...");

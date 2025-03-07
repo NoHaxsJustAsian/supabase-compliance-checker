@@ -96,16 +96,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   // Sign out function
   const signOut = async () => {
     try {
-      // Clear PAT from session storage
-      const { clearCredentials } = await import('./auth-utils')
-      clearCredentials()
-      
-      const { error } = await supabase.auth.signOut()
-      if (!error) {
-        router.push('/auth')
+      // Clear credentials from session storage safely
+      try {
+        const { clearCredentials, getCredentials } = await import('./auth-utils')
+        
+        // Check if credentials exist first (optional, just for logging)
+        const credentials = await getCredentials()
+        console.log("Found credentials during signout:", !!credentials)
+        
+        // Always clear credentials, even if there are none
+        clearCredentials()
+      } catch (e) {
+        console.error("Error handling credentials during sign out:", e)
+        // Continue with sign out even if clearing credentials fails
       }
-      return { error }
+      
+      // Sign out from Supabase Auth
+      try {
+        const { error } = await supabase.auth.signOut()
+        if (error) {
+          console.warn("Supabase sign out error:", error)
+        }
+      } catch (authError) {
+        console.error("Error during Supabase auth signOut:", authError)
+      }
+      
+      // Always navigate to auth page, regardless of any errors
+      router.push('/auth')
+      
+      return { error: null }
     } catch (error) {
+      console.error("Unexpected error during sign out:", error)
+      // Still try to navigate to auth page
+      router.push('/auth')
       return { error }
     }
   }

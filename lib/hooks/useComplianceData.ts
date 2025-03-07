@@ -22,6 +22,17 @@ export function useComplianceData() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [evidenceLogs, setEvidenceLogs] = useState<any[]>([]);
   const [viewMode, setViewMode] = useState<"overview" | "project">("overview");
+  const [hasCredentials, setHasCredentials] = useState<boolean | null>(null);
+
+  // Check if credentials exist on mount and after operations that might change them
+  useEffect(() => {
+    const checkCredentials = async () => {
+      const credentials = await getCredentials();
+      setHasCredentials(!!credentials);
+    };
+    
+    checkCredentials();
+  }, [user]);
 
   // Fetch evidence logs from Supabase when the component mounts
   useEffect(() => {
@@ -125,7 +136,10 @@ export function useComplianceData() {
     const fetchCredentials = async () => {
       const credentials = await getCredentials();
       if (!credentials) {
-        router.push("/auth");
+        // Don't redirect to auth page, just set loading to false
+        // Users can be logged in without a PAT and set one later
+        console.log("No API credentials found, but allowing dashboard access");
+        setLoading(false);
         return;
       }
 
@@ -226,7 +240,16 @@ export function useComplianceData() {
     try {
       const credentials = await getCredentials();
       if (!credentials) {
-        router.push("/auth");
+        // Don't redirect to auth, just stop checks and show a message
+        console.log("Cannot run compliance checks: No API credentials found");
+        addEvidenceLog({
+          check: "Configuration",
+          status: "ERROR",
+          details: "No API credentials found. Please set your Personal Access Token (PAT) in the API Access tab.",
+          timestamp: new Date().toISOString(),
+        });
+        setRunningChecks(false);
+        setLoading(false);
         return;
       }
       
@@ -844,6 +867,12 @@ export function useComplianceData() {
     return complianceStatus;
   };
 
+  // Function to check if credentials exist
+  const checkIfCredentialsExist = async (): Promise<boolean> => {
+    const credentials = await getCredentials();
+    return !!credentials;
+  };
+
   return {
     loading,
     runningChecks,
@@ -853,6 +882,8 @@ export function useComplianceData() {
     selectedProjectId,
     evidenceLogs,
     viewMode,
+    hasCredentials,
+    checkIfCredentialsExist,
     fetchAvailableProjects,
     fetchEvidenceLogs,
     runComplianceChecks,
